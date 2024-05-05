@@ -1,13 +1,12 @@
 const express = require("express");
-const mongoose = require("mongoose")
-const cors = require("cors")
+const mongoose = require("mongoose");
+const cors = require("cors");
 
-const auth = require("./routes/auth.js")
-const house = require("./routes/house.js")
-const reservations = require("./routes/reservations.js")
+const auth = require("./routes/auth.js");
+const house = require("./routes/house.js");
+const reservations = require("./routes/reservations.js");
 
-require('dotenv').config();
-
+require("dotenv").config();
 
 const app = express();
 
@@ -19,23 +18,24 @@ app.use(express.urlencoded({ extended: true }));
 // Use routes
 app.use("/auth", auth);
 app.use("/house", house);
-app.use("/reservations", reservations)
-
+app.use("/reservations", reservations);
 
 async function main() {
-    await mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.tkzvadc.mongodb.net/motel-develpoment-db`)
-    try {
-        app.listen(process.env.PORT, () => {
-            console.log(`Server is running on port ${process.env.PORT}`)
-        })
-        console.log('MongoDB connected By Mongo Client Sk Miraj!')
-    } catch (err) {
-        console.log(err)
-    }
+  await mongoose.connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.tkzvadc.mongodb.net/motel-develpoment-db`
+  );
+  try {
+    app.listen(process.env.PORT, () => {
+      console.log(`Server is running on port ${process.env.PORT}`);
+    });
+    console.log("MongoDB connected By Mongo Client Sk Miraj!");
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-app.get('/',(req,res)=>{
-    res.send(` Hello Express is server Working on ${process.env.PORT}`);
-})
+app.get("/", (req, res) => {
+  res.send(` Hello Express is server Working on ${process.env.PORT}`);
+});
 
-main();
+// main();
