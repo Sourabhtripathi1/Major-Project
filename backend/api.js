@@ -21,14 +21,12 @@ app.use("/house", house);
 app.use("/reservations", reservations);
 
 async function main() {
-  await mongoose.connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.tkzvadc.mongodb.net/motel-develpoment-db`
-  );
+  await mongoose.connect(process.env.MONGODB_URI);
   try {
     app.listen(process.env.PORT, () => {
       console.log(`Server is running on port ${process.env.PORT}`);
     });
-    console.log("MongoDB connected By Mongo Client Sk Miraj!");
+    console.log("MongoDB connected");
   } catch (err) {
     console.log(err);
   }
@@ -38,4 +36,4 @@ app.get("/", (req, res) => {
   res.send(` Hello Express is server Working on ${process.env.PORT}`);
 });
 
-// main();
+main();

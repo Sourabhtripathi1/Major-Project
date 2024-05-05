@@ -43,7 +43,7 @@ api.interceptors.response.use(
           refreshToken,
         });
         console.log(response);
-        console.log('Api Working Frontent!');
+        console.log("Api Working Frontent!");
 
         const newAccessToken = response.data.accessToken;
 
