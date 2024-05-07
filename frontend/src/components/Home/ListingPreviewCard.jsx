@@ -27,7 +27,7 @@ const ListingPreviewCard = ({ listingData, showBeforeTaxPrice }) => {
             </p>
           )}
           <p className="text-sm text-[#222222] font-semibold">
-            ${listingData?.basePrice}{" "}
+            ₹{listingData?.basePrice}{" "}
             <span className=" font-normal">night</span>
           </p>
         </div>
