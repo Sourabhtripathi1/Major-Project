@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { FadeLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getOneListingRoomsDetails } from "../redux/actions/houseActions";
 
 const Book = () => {
@@ -43,18 +44,61 @@ const Book = () => {
     });
   }, []);
 
+  // ====================================================================================
+
+  const newReservationData = useSelector(
+    (state) => state.reservations?.newReservationsData
+  );
+  const listingData = useSelector(
+    (state) => state.house.listingDetails.listing
+  );
+
+  const nightStaying = searchParamsObj?.nightStaying;
+
+  const basePrice =
+    parseInt(nightStaying) !== 0
+      ? parseInt(nightStaying) * listingData?.basePrice
+      : listingData?.basePrice;
+
+  const tax =
+    basePrice !== 0
+      ? Math.round((basePrice * 14) / 100)
+      : Math.round((listingData?.basePrice * 14) / 100);
+
+  const guestNumber = newReservationData
+    ? newReservationData.guestNumber
+    : searchParamsObj?.numberOfGuests;
+  const checkin = newReservationData
+    ? newReservationData?.checkIn
+    : searchParamsObj.checkin;
+  const checkout = newReservationData
+    ? newReservationData?.checkOut
+    : searchParamsObj?.checkout;
+  const orderId = Math.round(Math.random() * 10000000000);
+  var totalPrice = basePrice + tax;
+
+  // ====================================================================================
+
   useEffect(() => {
-    // making payment calls
-    fetch(`${API}reservations/create_payment_intent`, {
-      method: "POST",
-      body: JSON.stringify({}),
-    }).then(async (r) => {
-      const { clientSecret } = await r.json();
-      setClientSecret(clientSecret);
-    }).catch((err)=>{
-      alert(err)
-    });
-  }, []);
+    if (totalPrice) {
+      // making payment calls
+      fetch(`${API}reservations/create_payment_intent`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: totalPrice }),
+      })
+        .then(async (r) => {
+          const { clientSecret } = await r.json();
+          totalPrice = 0;
+          setClientSecret(clientSecret);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+  }, [totalPrice]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -77,8 +121,7 @@ const Book = () => {
               onClick={() => {
                 navigate(-1);
               }}
-              className=" p-2 rounded-full hover:bg-[#f1f1f1] cursor-pointer transition duration-200 ease-in"
-            >
+              className=" p-2 rounded-full hover:bg-[#f1f1f1] cursor-pointer transition duration-200 ease-in">
               <MdKeyboardArrowLeft size={28} />
             </div>
             <h2 className="text-lg sm:text-xl md:text-[32px] text-[#222222] font-medium text-center">

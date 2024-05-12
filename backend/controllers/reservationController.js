@@ -15,22 +15,21 @@ exports.getStripePublishableKey = async (req, res) => {
 exports.createPaymentIntent = async (req, res) => {
   try {
     const payload = req.body;
-    console.log(payload);
 
     const paymentIntent = await stripe.paymentIntents.create({
-      description: "Software development services",
+      description: "RoomEase Hotels",
       shipping: {
-        name: "Sk Mirajul Islam",
+        name: "Sourabh Tripathi",
         address: {
-          line1: "510 Townsend St",
-          postal_code: "98140",
-          city: "San Francisco",
-          state: "CA",
-          country: "US",
+          line1: "3B9 Kansua, Udhyog puri",
+          postal_code: "324004",
+          city: "Kota",
+          state: "Rajasthan",
+          country: "India",
         },
       },
-      amount: 1099,
-      currency: "usd",
+      amount: payload.amount * 100,
+      currency: "inr",
       payment_method_types: ["card"],
     });
 
@@ -39,7 +38,7 @@ exports.createPaymentIntent = async (req, res) => {
       clientSecret: paymentIntent.client_secret,
     });
   } catch (e) {
-    console.log("====================================");
+    console.log("=========errr===============");
     console.log(e.message);
     console.log("====================================");
     return res.status(400).send({
@@ -89,7 +88,7 @@ exports.newReservation = async (req, res) => {
     const findSavedListingReservation = await reservationDB.find({
       listingId: listingId,
     });
-    console.log(findSavedListingReservation);
+    // console.log(findSavedListingReservation);
 
     const listing = findSavedListingReservation.map((reservation, i) => {
       return reservation.checkIn === checkIn;
@@ -128,10 +127,10 @@ exports.getAllReservations = async (req, res) => {
 
 exports.getAuthorsReservations = async (req, res) => {
   try {
-    const userId = req.user;
+    const authorId = req.user;
 
     const findCriteria = {
-      authorId: userId,
+      authorId: authorId,
     };
 
     const authorsListingReservations = await reservationDB.find(findCriteria);

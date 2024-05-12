@@ -25,8 +25,6 @@ const Listing = ({ searchParamsObj }) => {
 
   const totalPrice = basePrice + tax;
 
-  console.log(listingData, "lis");
-
   return (
     <div>
       <div className=" border border-[#dddddd] rounded-xl p-6 flex flex-col sticky top-28 min-h-[200px] bg-white">
