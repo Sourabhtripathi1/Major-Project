@@ -50,24 +50,25 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`border-b-[1.4px] border-[#f1f1f1] sticky top-0 z-[99] bg-white ${inBookingPage && "hidden md:block"
-        }`}
-    >
+      className={`border-b-[1.4px] border-[#f1f1f1] sticky top-0 z-[99] bg-white ${
+        inBookingPage && "hidden md:block"
+      }`}>
       <div
-        className={`xl:px-10 py-4 xl:mx-auto items-center px-5 relative ${inUserProfile ||
-            inUserDashboard ||
-            inHostHomesLandingPage ||
-            inListingDetailsPage
+        className={`xl:px-10 py-4 xl:mx-auto items-center px-5 relative ${
+          inUserProfile ||
+          inUserDashboard ||
+          inHostHomesLandingPage ||
+          inListingDetailsPage
             ? " max-w-screen-xl"
             : " max-w-screen-2xl"
-          }
-        ${inUserDashboard || inHostHomesLandingPage
+        }
+        ${
+          inUserDashboard || inHostHomesLandingPage
             ? "flex flex-row justify-between"
             : "grid grid-cols-2 lg:grid-cols-3 gap-2"
-          }
+        }
         ${inHostHomesLandingPage ? " xl:px-20" : ""}
-        `}
-      >
+        `}>
         {/* logo */}
         <div className=" md:w-[160px]">
           <span className="flex flex-row gap-2 items-center max-w-[120px]">
@@ -84,7 +85,7 @@ const Navbar = () => {
             />
             {/* if user is in hosting homes page we want only logo */}
             {inHostHomesLandingPage || isSmallDevice ? null : (
-              <p className="text-xl text-[#ff385c] font-bold">Journey Cuisine</p>
+              <p className="text-xl text-[#ff385c] font-bold">RoomEase</p>
             )}
           </span>
         </div>
@@ -98,23 +99,25 @@ const Navbar = () => {
               // if user is in dahsboard
               <div>{inUserDashboard && <MiniNavbar />} </div>
             ) : (
-              <div className="mx-auto lg:block hidden">
-                <div className="border-[1px] border-[#dddddd] rounded-full px-3 py-2 flex items-center shadow hover:shadow-md transition-all cursor-pointer">
-                  <input
+              <>
+                <div className="mx-auto lg:block hidden">
+                  <div>
+                    {/* <input
                     type="search"
                     className=" focus:outline-none pl-2"
                     style={{
-                      borderRadius: '20px',
-                      height: '30px',
-                      marginRight: '8px',
+                      borderRadius: "20px",
+                      height: "30px",
+                      marginRight: "8px",
                     }}
                     placeholder="Search for places"
                   />
                   <div className="bg-[#ff385c] rounded-full p-2">
                     <img src={searchIcon} alt="Search hotel" className="w-4" />
+                  </div> */}
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </>
         )}
@@ -131,8 +134,7 @@ const Navbar = () => {
                 </p>
                 <Link
                   to="/become-a-host"
-                  className=" flex flex-row justify-between items-center gap-2 bg-[#ff385c] hover:bg-[#d90b63] transition-all duration-300 px-3 py-2 rounded-lg"
-                >
+                  className=" flex flex-row justify-between items-center gap-2 bg-[#ff385c] hover:bg-[#d90b63] transition-all duration-300 px-3 py-2 rounded-lg">
                   <img src={house} alt="House setup" className=" w-4 md:w-5" />
                   <p className=" font-semibold text-sm md:text-base text-white">
                     Motel setup
@@ -146,8 +148,7 @@ const Navbar = () => {
                   {!inUserDashboard && (
                     <Link
                       to="/host/homes"
-                      className=" bg-[#ffffff] hover:bg-[#f0f0f0] transition-all rounded-full p-3 cursor-pointer mr-3 md:block hidden"
-                    >
+                      className=" bg-[#ffffff] hover:bg-[#f0f0f0] transition-all rounded-full p-3 cursor-pointer mr-3 md:block hidden">
                       <p className="text-sm font-medium text-[#222222]">
                         Motel your home
                       </p>
@@ -158,8 +159,7 @@ const Navbar = () => {
                     className="border-[1px] border-[#dddddd] rounded-full py-1 px-2 flex flex-row gap-3 hover:shadow-md transition-all cursor-pointer relative"
                     onClick={() => {
                       setShowUserMenu((prevValue) => !prevValue);
-                    }}
-                  >
+                    }}>
                     <img
                       src={hamburgerMenu}
                       alt="Motel user menu"
@@ -185,23 +185,20 @@ const Navbar = () => {
                       {!user ? (
                         <div
                           ref={userMenuRef}
-                          className="shadow-md absolute right-9 top-[74px] bg-[#ffffff] border-[1px] border-[#dddddd] rounded-lg flex flex-col py-2 w-[230px] transition-all user__menu"
-                        >
+                          className="shadow-md absolute right-9 top-[74px] bg-[#ffffff] border-[1px] border-[#dddddd] rounded-lg flex flex-col py-2 w-[230px] transition-all user__menu">
                           <Link
                             className="font-medium"
                             onClick={() => {
                               setShowUserMenu(false);
                               setPopup(true);
-                            }}
-                          >
+                            }}>
                             Sign up
                           </Link>
                           <Link
                             onClick={() => {
                               setShowUserMenu(false);
                               setPopup(true);
-                            }}
-                          >
+                            }}>
                             Login
                           </Link>
                           <hr className="h-[1.5px] bg-[#dddddd] my-1" />
@@ -215,8 +212,7 @@ const Navbar = () => {
                           className="shadow-md absolute right-9 top-[70px] bg-[#ffffff] border-[1px] border-[#dddddd] rounded-lg flex flex-col py-2 w-[230px] transition-all user__menu"
                           onClick={() => {
                             setShowUserMenu((prev) => !prev);
-                          }}
-                        >
+                          }}>
                           {user?.role === "host" || user?.role === "admin" ? (
                             <>
                               {!inUserDashboard ? (
@@ -227,8 +223,7 @@ const Navbar = () => {
                                       sessionStorage.setItem("activePage", 1)
                                     );
                                   }}
-                                  className="font-medium"
-                                >
+                                  className="font-medium">
                                   Dashboard
                                 </Link>
                               ) : (
@@ -240,7 +235,9 @@ const Navbar = () => {
                           ) : (
                             <Link className="font-medium">Notifications</Link>
                           )}
-                          <Link className="font-medium">Trips</Link>
+                          <Link to={"/trips"} className="font-medium">
+                            Trips
+                          </Link>
                           <Link className="font-medium">Wishlists</Link>
                           <hr className="h-[1.5px] bg-[#dddddd] my-1" />
                           <Link to={"/host/homes"}>Motel your home</Link>
@@ -250,8 +247,7 @@ const Navbar = () => {
                           <Link
                             onClick={() => {
                               handleLogout();
-                            }}
-                          >
+                            }}>
                             Log out
                           </Link>
                         </div>

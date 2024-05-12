@@ -29,54 +29,58 @@ import { FadeLoader } from "react-spinners";
 // import Receipt from "../../Pages/ListingHouseFinalStep/Receipt";
 // import Thankyou from "../../Pages/ListingHouseFinalStep/Thankyou";
 // import Home from "../../Pages/Home"; = lazy (() => import)
-const ListingHouseStepOneAddress = lazy(() =>
-  import("../../Pages/ListingHouseStepOne/ListingHouseStepOneAddress")
+const ListingHouseStepOneAddress = lazy(
+  () => import("../../Pages/ListingHouseStepOne/ListingHouseStepOneAddress")
 );
-const ListingHouseStepOneFloorPlan = lazy(() =>
-  import("../../Pages/ListingHouseStepOne/ListingHouseStepOneFloorPlan")
+const ListingHouseStepOneFloorPlan = lazy(
+  () => import("../../Pages/ListingHouseStepOne/ListingHouseStepOneFloorPlan")
 );
-const StepTwoOverview = lazy(() =>
-  import("../../Pages/ListingHouseStepTwo/StepTwoOverview")
+const StepTwoOverview = lazy(
+  () => import("../../Pages/ListingHouseStepTwo/StepTwoOverview")
 );
-const Amenities = lazy(() =>
-  import("../../Pages/ListingHouseStepTwo/Amenities")
+const Amenities = lazy(
+  () => import("../../Pages/ListingHouseStepTwo/Amenities")
 );
-const ListingHousePhotos = lazy(() =>
-  import("../../Pages/ListingHouseStepTwo/ListingHousePhotos")
+const ListingHousePhotos = lazy(
+  () => import("../../Pages/ListingHouseStepTwo/ListingHousePhotos")
 );
-const HouseTitle = lazy(() =>
-  import("../../Pages/ListingHouseStepTwo/HouseTitle")
+const HouseTitle = lazy(
+  () => import("../../Pages/ListingHouseStepTwo/HouseTitle")
 );
 const Home = lazy(() => import("../../Pages/Home"));
 const ListingDetails = lazy(() => import("../../Pages/ListingDetails"));
 // import Book from "../../Pages/Book";
 const Book = lazy(() => import("../../Pages/Book"));
 const PaymentConfirmed = lazy(() => import("../../Pages/PaymentConfirmed"));
-const Thankyou = lazy(() =>
-  import("../../Pages/ListingHouseFinalStep/Thankyou")
+const Thankyou = lazy(
+  () => import("../../Pages/ListingHouseFinalStep/Thankyou")
 );
 const Receipt = lazy(() => import("../../Pages/ListingHouseFinalStep/Receipt"));
 const Legal = lazy(() => import("../../Pages/ListingHouseFinalStep/Legal"));
 const Pricing = lazy(() => import("../../Pages/ListingHouseFinalStep/Pricing"));
-const Visibility = lazy(() =>
-  import("../../Pages/ListingHouseFinalStep/Visibility")
+const Visibility = lazy(
+  () => import("../../Pages/ListingHouseFinalStep/Visibility")
 );
-const FinalStepOverview = lazy(() =>
-  import("../../Pages/ListingHouseFinalStep/FinalStepOverview")
+const FinalStepOverview = lazy(
+  () => import("../../Pages/ListingHouseFinalStep/FinalStepOverview")
 );
-const Description = lazy(() =>
-  import("../../Pages/ListingHouseStepTwo/Description")
+const Description = lazy(
+  () => import("../../Pages/ListingHouseStepTwo/Description")
 );
-const Highlight = lazy(() =>
-  import("../../Pages/ListingHouseStepTwo/Highlight")
+const Highlight = lazy(
+  () => import("../../Pages/ListingHouseStepTwo/Highlight")
 );
-// import PaymentConfirmed from "../../Pages/PaymentConfirmed";
+import { UserReservations } from "../../Pages/UserProfile/UserReservations";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
     children: [
+      {
+        path: "/trips",
+        element: <UserReservations />,
+      },
       {
         path: "/",
         element: (
@@ -85,8 +89,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Home />
           </Suspense>
         ),
@@ -99,8 +102,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <ListingDetails />
           </Suspense>
         ),
@@ -114,8 +116,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Book />,
           </Suspense>
         ),
@@ -152,8 +153,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <PaymentConfirmed />
           </Suspense>
         ),
@@ -188,8 +188,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <ListingHouseStepOneAddress />
           </Suspense>
         ),
@@ -202,8 +201,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <ListingHouseStepOneFloorPlan />
           </Suspense>
         ),
@@ -216,8 +214,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <StepTwoOverview />
           </Suspense>
         ),
@@ -230,8 +227,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Amenities />
           </Suspense>
         ),
@@ -244,8 +240,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <ListingHousePhotos />
           </Suspense>
         ),
@@ -258,8 +253,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <HouseTitle />
           </Suspense>
         ),
@@ -272,8 +266,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Highlight />
           </Suspense>
         ),
@@ -286,8 +279,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Description />
           </Suspense>
         ),
@@ -300,8 +292,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <FinalStepOverview />
           </Suspense>
         ),
@@ -314,8 +305,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Visibility />
           </Suspense>
         ),
@@ -328,8 +318,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Pricing />
           </Suspense>
         ),
@@ -342,8 +331,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Legal />
           </Suspense>
         ),
@@ -356,8 +344,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Receipt />
           </Suspense>
         ),
@@ -370,8 +357,7 @@ const router = createBrowserRouter([
               <div className=" flex justify-center items-center w-full h-[60dvh]">
                 <FadeLoader color="#000" />
               </div>
-            }
-          >
+            }>
             <Thankyou />
           </Suspense>
         ),

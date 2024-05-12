@@ -49,8 +49,7 @@ const UpcomingReservation = ({ data }) => {
                       key={i}
                       className={`${
                         i === arr.length - 1 ? "" : "border-b border-[#dddddd]"
-                      }`}
-                    >
+                      }`}>
                       {/* serial */}
                       <td className=" px-6 py-4 w-[120px]">
                         <p className="text-sm text-[#222222]">{i + 1}</p>
@@ -65,8 +64,7 @@ const UpcomingReservation = ({ data }) => {
                       <td className=" px-6 py-4 w-[120px]">
                         <Link
                           to={`/rooms/${listing.listingId}`}
-                          className=" text-sm text-[#222222] font-medium w-[120px] underline hover:text-blue-500 transition-colors duration-200 ease-in"
-                        >
+                          className=" text-sm text-[#222222] font-medium w-[120px] underline hover:text-blue-500 transition-colors duration-200 ease-in">
                           See listing
                         </Link>
                       </td>
