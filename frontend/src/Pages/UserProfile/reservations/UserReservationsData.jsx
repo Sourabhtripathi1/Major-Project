@@ -28,7 +28,9 @@ const UserReservationsData = ({ active, data }) => {
 
   // setting upcoming and completed reservations
   useEffect(() => {
-    const currentDate = new Date().toISOString();
+    var currentDate = new Date();
+    currentDate = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000);
+    currentDate = currentDate.toISOString();
 
     const upcoming = reservations.filter(
       (reservation) => reservation.checkIn > currentDate
@@ -56,7 +58,7 @@ const UserReservationsData = ({ active, data }) => {
           <>{/* <UserCancelledReservations /> */}</>
         ) : (
           <>
-            <UserAllReservations />
+            <UserAllReservations data={reservations} />
           </>
         )}
       </div>

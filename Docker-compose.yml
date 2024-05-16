@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+  frontend:
+    image: sourabhtripathi1/room-ease-client:1.0
+    restart: always
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile.client
+    ports:
+      - "8001:3001"
+
+  backend:
+    image: sourabhtripathi1/room-ease-backend:1.0
+    restart: always
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.server
+    ports:
+      - "8002:5001"

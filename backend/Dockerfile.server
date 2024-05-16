@@ -1,0 +1,18 @@
+FROM node:21-alpine
+
+ENV  PORT=5001
+ENV  MONGODB_URI="mongodb://Room_Ease:%23Sourabh1@mongo.sourabhtripathi.online/Room_Ease?authSource=Room_Ease"
+ENV  ACCESS_TOKEN_SECRET="ACCESS_TOKEN_SECRET"
+ENV  REFRESH_TOKEN_SECRET="REFRESH_TOKEN_SECRET"
+ENV  STRIPE_SECRET_KEY="sk_test_51PDqbqSFFT6fZmDu0x4737VKt4k3RdDRGkXAR6AX4QdJskeDW9s1IXw1CizK4avpmUjS6XVuPLKd5A3KYQ6y0DkT00EdyNyQVr"
+ENV  STRIPE_PUBLISHABLE_KEY = "pk_test_51PDqbqSFFT6fZmDul5Zv5DdPDKpW4Hf6njwDjUwA0sTno6dvXGBu6EkomPV142JzSoJ6gc4z4Qlj4flLpG3SHlur00ukVmtLdx"
+
+EXPOSE 5001
+
+WORKDIR /app
+
+COPY ./backend .
+
+RUN npm install --no-dev --force
+
+CMD ["node","api.js"]

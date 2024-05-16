@@ -61,7 +61,7 @@ const ReservationsData = ({ active }) => {
           </>
         ) : (
           <>
-            <AllReservations />
+            <AllReservations data={reservations} />
           </>
         )}
       </div>

@@ -1,0 +1,18 @@
+FROM node:21-alpine
+
+EXPOSE 3001
+
+WORKDIR /app
+
+COPY ./frontend .
+
+RUN npm install --no-dev --force
+
+RUN npm run build
+
+# RUN rm -r node_modules
+
+
+RUN npm install -g serve
+
+CMD [ "serve", "-s", "dist", "-p", "3001"]

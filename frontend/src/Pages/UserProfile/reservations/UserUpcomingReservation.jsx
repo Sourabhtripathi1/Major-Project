@@ -14,10 +14,7 @@ const UserCompletedReservations = ({ data }) => {
                     S.NO
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    ORDER ID
-                  </th>
-                  <th scope="col" className="px-6 py-4">
-                    LISTING
+                    VIEW
                   </th>
                   <th scope="col" className="px-6 py-4">
                     GUEST
@@ -26,7 +23,7 @@ const UserCompletedReservations = ({ data }) => {
                     NIGHT
                   </th>
                   <th scope="col" className="px-6 py-4">
-                    EARNED
+                    PRICE
                   </th>
                   <th scope="col" className="px-6 py-4">
                     CHECK IN
@@ -54,18 +51,18 @@ const UserCompletedReservations = ({ data }) => {
                       <td className=" px-6 py-4 w-[120px]">
                         <p className="text-sm text-[#222222]">{i + 1}</p>
                       </td>
-                      {/* see listing btn */}
+                      {/* // see listing btn
                       <td className=" px-6 py-4 flex flex-row items-center gap-2">
                         <p className="text-sm text-[#222222]">
                           {listing.orderId}
                         </p>
-                      </td>
+                      </td> */}
                       {/* order id*/}
                       <td className=" px-6 py-4 w-[120px]">
                         <Link
                           to={`/rooms/${listing.listingId}`}
                           className=" text-sm text-[#222222] font-medium w-[120px] underline hover:text-blue-500 transition-colors duration-200 ease-in">
-                          See listing
+                          See Place
                         </Link>
                       </td>
                       {/* guest number */}
@@ -83,7 +80,11 @@ const UserCompletedReservations = ({ data }) => {
                       {/* author earned */}
                       <td className=" px-6 py-4 w-[120px]">
                         <p className="text-sm text-[#222222]">
-                          ₹ {listing.authorEarnedPrice}
+                          ₹{" "}
+                          {listing.nightStaying > 0
+                            ? (listing.basePrice + listing.taxes) *
+                              listing.nightStaying
+                            : listing.basePrice + listing.taxes}
                         </p>
                       </td>
                       {/* check in */}
