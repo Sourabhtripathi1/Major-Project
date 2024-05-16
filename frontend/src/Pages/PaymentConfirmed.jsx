@@ -32,6 +32,7 @@ const PaymentConfirmed = () => {
     checkOut: searchParamsObj?.checkOut,
     nightStaying: searchParamsObj?.nightStaying,
     orderId: searchParamsObj?.orderId,
+    user: searchParamsObj?.user,
   };
 
   useEffect(() => {
@@ -57,8 +58,6 @@ const PaymentConfirmed = () => {
       setIsLoading(false);
     }
   }, []);
-
-  console.log(reservationData, "reservation");
 
   if (isLoading) {
     return (
@@ -86,8 +85,7 @@ const PaymentConfirmed = () => {
           <div className=" px-5 mt-5 max-w-[180px] flex justify-center mx-auto">
             <Link
               to={"/"}
-              className=" bg-[#282828] text-[#ffffff] text-center font-medium block w-full py-2 rounded-md hover:bg-[#000000] transition-colors duration-300"
-            >
+              className=" bg-[#282828] text-[#ffffff] text-center font-medium block w-full py-2 rounded-md hover:bg-[#000000] transition-colors duration-300">
               Continue
             </Link>
           </div>

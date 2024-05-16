@@ -9,6 +9,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { FadeLoader } from "react-spinners";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { toast } from "react-hot-toast";
 import { getOneListingRoomsDetails } from "../redux/actions/houseActions";
 
 const Book = () => {
@@ -27,6 +28,26 @@ const Book = () => {
   const listingId = params?.id;
 
   const dispatch = useDispatch();
+
+  // ====================================================================================
+
+  const user = useSelector((state) => state.user?.userDetails);
+
+  var redirect = () => {
+    toast.error("Please, Login or SignUp");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (user === null) {
+      redirect();
+    }
+    return () => {
+      redirect = null;
+    };
+  }, []);
+
+  // ====================================================================================
 
   useEffect(() => {
     (async () => {

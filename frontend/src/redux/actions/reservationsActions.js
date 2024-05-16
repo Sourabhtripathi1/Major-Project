@@ -11,7 +11,9 @@ export const newReservation = (data) => async (dispatch) => {
     basePrice: data?.reservationBasePrice,
     taxes: data?.tax,
     authorEarnedPrice: data?.authorEarned,
+    user: data?.userState,
   };
+
   dispatch({
     type: "NEW_RESERVATIONS_DATA",
     payload: reservationsData,

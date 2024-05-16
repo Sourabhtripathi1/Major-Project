@@ -64,26 +64,26 @@ const DashboardCards = ({ reservations, totalPrice }) => {
       <Cards
         title={"Total Revenue"}
         icon={revenueIcon}
-        heading={`$${totalPrice}`}
-        subHead={"+12% increase"}
+        heading={`₹${totalPrice}`}
+        // subHead={"+12% increase"}
       />
       <Cards
         title={"Active Booking"}
         icon={booking}
-        heading={`+${activeBooking}`}
-        subHead={"+20% increase"}
+        heading={`${activeBooking}`}
+        // subHead={"+20% increase"}
       />
       <Cards
         title={"Host houses"}
         icon={house}
-        heading={`+${hostedHouse}`}
-        subHead={"-4% deccrease"}
+        heading={`${hostedHouse}`}
+        // subHead={"-4% deccrease"}
       />
       <Cards
         title={"Monthly earned"}
         icon={categories}
-        heading={`+${totalMonthlyEarnings}`}
-        subHead={"-10% deccrease"}
+        heading={`₹${totalMonthlyEarnings}`}
+        // subHead={"-10% deccrease"}
       />
     </div>
   );

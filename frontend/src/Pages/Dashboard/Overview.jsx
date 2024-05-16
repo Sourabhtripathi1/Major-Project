@@ -4,6 +4,8 @@ import DashboardCards from "../../components/dashboard/DashboardCards";
 import { useEffect, useState } from "react";
 import { getAuthorReservations } from "../../redux/actions/reservationsActions";
 import { removeDuplicates } from "../../hooks/useRemoveDuplicates";
+import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Overview = () => {
   const listingReservations = useSelector(
@@ -12,6 +14,24 @@ const Overview = () => {
   const [reservations, setReservations] = useState([]);
 
   const dispatch = useDispatch();
+
+  // =====================================================================================
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  var redirect = () => {
+    toast.error("Please, Login or SignUp");
+    navigate("/");
+  };
+  useEffect(() => {
+    if (id === "undefined") {
+      redirect();
+    }
+    return () => {
+      redirect = null;
+    };
+  }, []);
+  // ========================================================================================
 
   // set reservation to the global store
   useEffect(() => {

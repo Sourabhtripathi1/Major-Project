@@ -1,6 +1,25 @@
 import step1 from "../../assets/video/step1_video.mp4";
+import toast from "react-hot-toast";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ListHouseStepOne = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+
+  var redirect = () => {
+    toast.error("Please, Login or SignUp");
+    navigate("/");
+  };
+  useEffect(() => {
+    if (id === "undefined") {
+      redirect();
+    }
+    return () => {
+      redirect = null;
+    };
+  }, []);
+
   return (
     <section className=" h-[80vh] flex flex-col lg:flex-row justify-around gap-5 lg:gap-10 items-center w-full my-8 sm:my-12 md:my-16 lg:my-0">
       <div className="flex flex-col gap-2 md:gap-4 text-[#222222] sm:px-5 md:px-8 lg:px-10">

@@ -38,7 +38,7 @@ exports.createPaymentIntent = async (req, res) => {
       clientSecret: paymentIntent.client_secret,
     });
   } catch (e) {
-    console.log("=========errr===============");
+    console.log("=========error===============");
     console.log(e.message);
     console.log("====================================");
     return res.status(400).send({
@@ -60,6 +60,7 @@ exports.newReservation = async (req, res) => {
     const checkOut = payload.checkOut;
     const nightStaying = payload.nightStaying;
     const orderId = payload.orderId;
+    const user = payload.user;
 
     const findCriteria = {
       _id: new mongoose.Types.ObjectId(listingId),
@@ -83,6 +84,7 @@ exports.newReservation = async (req, res) => {
       taxes: tax,
       authorEarnedPrice: authorEarnedPrice,
       orderId: orderId,
+      user: user,
     };
 
     const findSavedListingReservation = await reservationDB.find({
@@ -140,6 +142,26 @@ exports.getAuthorsReservations = async (req, res) => {
     }
 
     res.status(200).send(authorsListingReservations);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.getCustomerReservations = async (req, res) => {
+  try {
+    const user = req.user;
+
+    const findCriteria = {
+      user: user,
+    };
+
+    const userReservations = await reservationDB.find(findCriteria);
+
+    if (!userReservations) {
+      res.json({ message: "No listing booked yet" });
+    }
+
+    res.status(200).send(userReservations);
   } catch (error) {
     console.log(error);
   }

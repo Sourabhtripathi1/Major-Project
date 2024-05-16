@@ -83,7 +83,7 @@ const UpcomingReservation = ({ data }) => {
                       {/* author earned */}
                       <td className=" px-6 py-4 w-[120px]">
                         <p className="text-sm text-[#222222]">
-                          ${listing.authorEarnedPrice}
+                          ₹ {listing.authorEarnedPrice}
                         </p>
                       </td>
                       {/* check in */}

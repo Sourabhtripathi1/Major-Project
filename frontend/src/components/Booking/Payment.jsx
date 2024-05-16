@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDateFormatting } from "../../hooks/useDateFormatting";
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { PulseLoader } from "react-spinners";
 import { useSelector } from "react-redux";
 import { toast } from "react-hot-toast";
@@ -19,8 +23,12 @@ const Payment = ({ searchParamsObj }) => {
   const [message, setMessage] = useState("");
   //   geting the checkin and checkout dates
 
-  console.log(message)
-  
+  useEffect(() => {
+    if (message) {
+      console.log(message);
+    }
+  }, [message]);
+
   const dateObj = {
     checkin: searchParamsObj?.checkin,
     checkout: searchParamsObj?.checkout,
@@ -42,6 +50,9 @@ const Payment = ({ searchParamsObj }) => {
     ? newReservationData?.nightStaying
     : searchParamsObj?.nightStaying;
   const orderId = Math.round(Math.random() * 10000000000);
+  const user = newReservationData
+    ? newReservationData?.user
+    : "ID is not found in payment.jsx &reducer";
 
   // reservation form handler
   const handleSubmit = async (e) => {
@@ -55,14 +66,14 @@ const Payment = ({ searchParamsObj }) => {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: { 
-        return_url: `${window.location.origin}/payment-confirmed?guestNumber=${guestNumber}&checkIn=${checkin}&checkOut=${checkout}&listingId=${listingData?._id}&authorId=${listingData?.author}&nightStaying=${nightStaying}&orderId=${orderId}`,
+      confirmParams: {
+        return_url: `${window.location.origin}/payment-confirmed?guestNumber=${guestNumber}&checkIn=${checkin}&checkOut=${checkout}&listingId=${listingData?._id}&authorId=${listingData?.author}&nightStaying=${nightStaying}&orderId=${orderId}&user=${user}`,
       },
     });
 
     if (error) {
       setMessage(error.message);
-      console.log(error)
+      console.log(error);
       toast.error("Payment failed. Try again!");
     }
 
@@ -122,8 +133,7 @@ const Payment = ({ searchParamsObj }) => {
           <button
             type="submit"
             disabled={isProcessing}
-            className="w-full md:max-w-[180px] mt-7 px-5 py-3 rounded-md bg-[#ff385c] hover:bg-[#d90b63] transition duration-200 ease-in text-white font-medium cursor-pointer disabled:cursor-not-allowed disabled:opacity-30 disabled:bg-gray-400 min-w-[180px]"
-          >
+            className="w-full md:max-w-[180px] mt-7 px-5 py-3 rounded-md bg-[#ff385c] hover:bg-[#d90b63] transition duration-200 ease-in text-white font-medium cursor-pointer disabled:cursor-not-allowed disabled:opacity-30 disabled:bg-gray-400 min-w-[180px]">
             {isProcessing ? (
               <>
                 <PulseLoader size={8} color="#000000" speedMultiplier={0.5} />

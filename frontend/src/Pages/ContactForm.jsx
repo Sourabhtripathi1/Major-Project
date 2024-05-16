@@ -19,7 +19,7 @@ export const ContactUs = () => {
         "service_pifdyyh",
         "template_8e0ov6p",
         {
-          user_email: "skmirajulislam181@gmail.com", // Admin email
+          user_email: "sourabhtripathi8103@gmail.com", // Admin email
           message: `Query from ${clientName}: ${form.current["message"].value}`,
         },
         { publicKey: "W7JLonZhnMYOR4Vb7" }

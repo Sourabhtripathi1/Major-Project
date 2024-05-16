@@ -81,8 +81,7 @@ const Home = () => {
       <section
         className={` pt-8 grid md:grid-cols-12 gap-5 bg-white sticky top-16 z-30 ${
           hasScroll ? " shadow" : " shadow-none"
-        }`}
-      >
+        }`}>
         {/* categories */}
         <Category styleGrid={"md:col-span-8 lg:col-span-9"} />
         {/* taxes toggle card */}
@@ -121,8 +120,7 @@ const Home = () => {
                       <Link
                         to={`/rooms/${listing?._id}`}
                         key={listing._id}
-                        className=" flex flex-col gap-3 rounded-xl w-full sm:max-w-[300px] md:w-full mx-auto"
-                      >
+                        className=" flex flex-col gap-3 rounded-xl w-full sm:max-w-[300px] md:w-full mx-auto">
                         <ListingPreviewCard
                           listingData={listing}
                           showBeforeTaxPrice={showBeforeTaxPrice}
@@ -139,9 +137,9 @@ const Home = () => {
                     return (
                       // this will be link to see full details of the listing
                       <Link
+                        to={`/rooms/${listing?._id}`}
                         key={listing._id}
-                        className=" flex flex-col gap-3 rounded-xl w-[320px] md:w-[264px] mx-auto"
-                      >
+                        className=" flex flex-col gap-3 rounded-xl w-[320px] md:w-[264px] mx-auto">
                         <ListingPreviewCard
                           listingData={listing}
                           showBeforeTaxPrice={showBeforeTaxPrice}

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
-const CompletedReservations = ({ data }) => {
+const UserCompletedReservations = ({ data }) => {
   return (
     <div className="flex flex-col overflow-x-auto">
       <div className="">
@@ -106,4 +106,4 @@ const CompletedReservations = ({ data }) => {
   );
 };
 
-export default CompletedReservations;
+export default UserCompletedReservations;

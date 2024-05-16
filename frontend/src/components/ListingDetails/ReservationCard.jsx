@@ -7,7 +7,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 // date range selector css
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { newReservation } from "../../redux/actions/reservationsActions";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -57,7 +57,7 @@ const ReservationCard = ({ listingData }) => {
   // calculating how many nights guest is staying
   const [nightsStaying, setNightStaying] = useState(1);
 
-  console.log(nightsStaying, typeof nightsStaying, "nights");
+  // console.log(nightsStaying, typeof nightsStaying, "nights");
 
   // formatted dates to save in the db
   const formattedStartDate = selectedDates[0]?.startDate?.toISOString();
@@ -67,12 +67,12 @@ const ReservationCard = ({ listingData }) => {
   const localStartDate = new Date(formattedStartDate).toLocaleDateString();
   const localEndDate = new Date(formattedEndDate).toLocaleDateString();
 
-  console.log(
-    new Date(formattedStartDate).toLocaleDateString(),
-    localStartDate,
-    localEndDate,
-    "dates"
-  );
+  // console.log(
+  //   new Date(formattedStartDate).toLocaleDateString(),
+  //   localStartDate,
+  //   localEndDate,
+  //   "dates"
+  // );
   // Function to handle date selection
   const handleSelect = (ranges) => {
     setSelectedDates([ranges.selection]);
@@ -81,7 +81,7 @@ const ReservationCard = ({ listingData }) => {
   // booking function
   const orderNumber = localStorage.getItem("orderId");
   const orderId = orderNumber ? orderNumber : 1;
-  console.log(orderId);
+  // console.log(orderId);
   const handleBooking = () => {
     navigate(
       `/book/stays/${listingData._id}?numberOfGuests=${totalGuest}&nightStaying=${nightsStaying}&checkin=${formattedStartDate}&checkout=${formattedEndDate}&orderId=${orderId}`
@@ -98,7 +98,7 @@ const ReservationCard = ({ listingData }) => {
       if (res.status === 200) {
         setReservations(res.data);
       }
-      console.log(res, "reservation data");
+      // console.log(res, "reservation data");
     })();
   }, [listingData?._id]);
 
@@ -129,6 +129,8 @@ const ReservationCard = ({ listingData }) => {
     setTotalGuest(guestsNumber + childrenNumber);
   }, [guestsNumber, childrenNumber]);
 
+  const userState = useSelector((state) => state.user?.userDetails?._id);
+
   // reservation data
   useEffect(() => {
     const data = {
@@ -140,6 +142,7 @@ const ReservationCard = ({ listingData }) => {
       reservationBasePrice,
       tax,
       authorEarned,
+      userState,
     };
     dispatch(newReservation(data));
   }, [
@@ -160,7 +163,7 @@ const ReservationCard = ({ listingData }) => {
     endDate: parseISO(obj.checkOut),
   }));
 
-  console.log(disabledDateRanges);
+  // console.log(disabledDateRanges);
 
   // Generate an array of individual dates within disabledDateRanges
   const disabledDates = disabledDateRanges.reduce((dates, range) => {
@@ -182,7 +185,7 @@ const ReservationCard = ({ listingData }) => {
         <div className=" flex felx-row justify-between items-start">
           <div className=" flex flex-col">
             <h3 className=" text-[22px] text-[#222222] font-semibold">
-              {/* ${listingData?.basePrice} */}${reservationBasePrice}
+              {/* ${listingData?.basePrice} */}₹ {reservationBasePrice}
             </h3>
             <p className=" text-[#313131] text-sm">Total before taxes</p>
           </div>
@@ -207,8 +210,7 @@ const ReservationCard = ({ listingData }) => {
                 onClick={() => {
                   setCalendarState(true);
                 }}
-                className=" grid grid-cols-2 cursor-pointer"
-              >
+                className=" grid grid-cols-2 cursor-pointer">
                 <div className="px-3 py-3">
                   <p className=" text-[10px] text-black font-semibold uppercase">
                     check-in
@@ -233,8 +235,7 @@ const ReservationCard = ({ listingData }) => {
             ref={dropdownRef}
             onClick={() => {
               setShowDropdown((prev) => !prev);
-            }}
-          >
+            }}>
             <div className=" rounded-bl-lg rounded-br-lg border border-[#b9b9b9] w-full min-h-[50px] cursor-pointer relative">
               {/* guests data */}
               <div className="px-3 py-3 flex flex-row items-center justify-between">
@@ -261,8 +262,7 @@ const ReservationCard = ({ listingData }) => {
         {showDropdown && (
           <div
             ref={dropdownRef}
-            className="min-h-[200px] w-72 shadow-lg border absolute z-[90] bg-white px-4 py-5 rounded-md"
-          >
+            className="min-h-[200px] w-72 shadow-lg border absolute z-[90] bg-white px-4 py-5 rounded-md">
             <div className=" flex flex-col gap-5">
               <div className=" flex felx-row items-center justify-between">
                 {/* adults number here */}
@@ -279,8 +279,7 @@ const ReservationCard = ({ listingData }) => {
                       setGuestsNumber((prev) => prev + 1);
                     }}
                     disabled={listingData?.floorPlan?.guests === totalGuest}
-                    className={` p-2 rounded-full border border-[#c0c0c0] opacity-90 disabled:cursor-not-allowed disabled:opacity-20`}
-                  >
+                    className={` p-2 rounded-full border border-[#c0c0c0] opacity-90 disabled:cursor-not-allowed disabled:opacity-20`}>
                     <AiOutlinePlus size={16} />
                   </button>
                   <p className=" w-[30px] flex justify-center">
@@ -292,8 +291,7 @@ const ReservationCard = ({ listingData }) => {
                       setGuestsNumber((prev) => prev - 1);
                     }}
                     disabled={guestsNumber === 1}
-                    className=" p-2 rounded-full border border-[#c0c0c0] disabled:cursor-not-allowed disabled:opacity-20"
-                  >
+                    className=" p-2 rounded-full border border-[#c0c0c0] disabled:cursor-not-allowed disabled:opacity-20">
                     <AiOutlineMinus size={16} />
                   </button>
                 </span>
@@ -313,8 +311,7 @@ const ReservationCard = ({ listingData }) => {
                       setChildrenNumber((prev) => prev + 1);
                     }}
                     disabled={listingData?.floorPlan?.guests === totalGuest}
-                    className=" p-2 rounded-full border border-[#c0c0c0] opacity-90 disabled:cursor-not-allowed disabled:opacity-20"
-                  >
+                    className=" p-2 rounded-full border border-[#c0c0c0] opacity-90 disabled:cursor-not-allowed disabled:opacity-20">
                     <AiOutlinePlus size={16} />
                   </button>
                   <p className=" w-[30px] flex justify-center">
@@ -326,8 +323,7 @@ const ReservationCard = ({ listingData }) => {
                       setChildrenNumber((prev) => prev - 1);
                     }}
                     disabled={childrenNumber === 0}
-                    className=" p-2 rounded-full border border-[#c0c0c0] disabled:cursor-not-allowed disabled:opacity-20"
-                  >
+                    className=" p-2 rounded-full border border-[#c0c0c0] disabled:cursor-not-allowed disabled:opacity-20">
                     <AiOutlineMinus size={16} />
                   </button>
                 </span>
@@ -339,8 +335,7 @@ const ReservationCard = ({ listingData }) => {
                 onClick={() => {
                   setShowDropdown(false);
                 }}
-                className="underline text-base text-[#222222] font-medium px-3 py-2 rounded-lg hover:bg-[#f5f5f5]"
-              >
+                className="underline text-base text-[#222222] font-medium px-3 py-2 rounded-lg hover:bg-[#f5f5f5]">
                 Close
               </button>
             </div>
@@ -354,8 +349,7 @@ const ReservationCard = ({ listingData }) => {
               onClick={() => {
                 handleBooking();
               }}
-              className="capitalize py-3 w-full bg-[#ff385c] hover:bg-[#d90b63] transition duration-200 ease-in text-white font-medium text-sm rounded-md"
-            >
+              className="capitalize py-3 w-full bg-[#ff385c] hover:bg-[#d90b63] transition duration-200 ease-in text-white font-medium text-sm rounded-md">
               reserve
             </button>
           </div>
@@ -365,8 +359,7 @@ const ReservationCard = ({ listingData }) => {
         {!calendarState ? null : (
           <div
             ref={calendarRef}
-            className=" absolute border-b-[1.2px] border-neutral-200 shadow-md left-[2px] sm:translate-x-[30%] sm:translate-y-[0%] md:translate-x-[-30%] lg:translate-x-[-20%] xl:translate-x-0 xl:translate-y-0"
-          >
+            className=" absolute border-b-[1.2px] border-neutral-200 shadow-md left-[2px] sm:translate-x-[30%] sm:translate-y-[0%] md:translate-x-[-30%] lg:translate-x-[-20%] xl:translate-x-0 xl:translate-y-0">
             <DateRange
               rangeColors={["#262626"]}
               date={new Date()}
