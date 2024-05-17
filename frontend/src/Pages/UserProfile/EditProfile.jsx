@@ -26,12 +26,12 @@ const EditProfile = () => {
 
   const [hasReloaded, setHasReloaded] = useState(true);
   useEffect(() => {
-    const hasReloadedFromStorage = localStorage.getItem('hasReloaded');
-    if (hasReloaded && hasReloadedFromStorage == 'true') {
+    const hasReloadedFromStorage = localStorage.getItem("hasReloaded");
+    if (hasReloaded && hasReloadedFromStorage == "true") {
       // Reload the page only once
       window.location.reload();
       setHasReloaded(false);
-      localStorage.setItem('hasReloaded', 'false');
+      localStorage.setItem("hasReloaded", "false");
     }
   }, [hasReloaded]);
 
@@ -46,10 +46,10 @@ const EditProfile = () => {
     handleResize();
 
     // Event listener for resize
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     // Cleanup
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   /* The `useEffect` hook in the provided code is responsible for uploading an image file to the
@@ -58,12 +58,11 @@ Cloudinary service when the `image` state variable changes. */
     if (image !== null && image?.size / 500000 < 5) {
       const imageFormData = new FormData();
       imageFormData.append("file", image);
-      imageFormData.append("upload_preset", "house-hunter");
-      imageFormData.append("cloud_name", "dc7c1v9e7");
-
+      imageFormData.append("upload_preset", "esr3lzia");
+      imageFormData.append("cloud_name", "do62a7jrx");
       try {
         setIsImgUploading(true);
-        fetch("https://api.cloudinary.com/v1_1/dc7c1v9e7/image/upload", {
+        fetch("https://api.cloudinary.com/v1_1/do62a7jrx/image/upload", {
           method: "POST",
           body: imageFormData,
         })
@@ -135,27 +134,39 @@ database when the `image` state variable changes. */
     uploadImg();
   }, [profileImageLink, user?._id]);
 
-  
-
   return (
     <div>
       <main className=" max-w-[1200px] mx-auto xl:px-10 py-12 flex min-h-[80vh] relative">
-        <section className={`flex flex-row gap-16 items-start flex-auto${isMobile ? ' flex-column' : ''}`} style={isMobile && window.innerWidth <= 600 ? { display: 'flex', flexDirection: 'column', padding: '30px' } : null}>
+        <section
+          className={`flex flex-row gap-16 items-start flex-auto${isMobile ? " flex-column" : ""}`}
+          style={
+            isMobile && window.innerWidth <= 600
+              ? { display: "flex", flexDirection: "column", padding: "30px" }
+              : null
+          }>
           {user?.profileImg ? (
             <div className="relative md:w-[320px]">
               <figure>
                 <img
                   src={user?.profileImg}
                   alt="User image"
-                  className={`max-w-xs rounded-full border-[1px] ${isMobile ? 'mobile-style' : 'desktop-style'}`}
-                  style={isMobile && window.innerWidth <= 600 ? { marginRight: 'auto', marginLeft: 'auto', display: 'block', width: '50%' } : null}
+                  className={`max-w-xs rounded-full border-[1px] ${isMobile ? "mobile-style" : "desktop-style"}`}
+                  style={
+                    isMobile && window.innerWidth <= 600
+                      ? {
+                          marginRight: "auto",
+                          marginLeft: "auto",
+                          display: "block",
+                          width: "50%",
+                        }
+                      : null
+                  }
                 />
               </figure>
               <div className=" flex justify-center items-center relative">
                 <label
                   htmlFor="imageUpload"
-                  className="absolute flex flex-row gap-2 items-center bg-white shadow-md px-3 py-2 rounded-full -bottom-4 cursor-pointer"
-                >
+                  className="absolute flex flex-row gap-2 items-center bg-white shadow-md px-3 py-2 rounded-full -bottom-4 cursor-pointer">
                   {/* <div className="absolute flex flex-row gap-2 items-center bg-white shadow-md px-3 py-2 rounded-full -bottom-4 cursor-pointer"> */}
                   {!isImageLoading ? (
                     <PulseLoader
@@ -192,8 +203,7 @@ database when the `image` state variable changes. */
                 </p>
                 <label
                   htmlFor="imageUpload"
-                  className="absolute flex flex-row gap-2 items-center bg-white shadow-md px-3 py-2 rounded-full -bottom-4 cursor-pointer"
-                >
+                  className="absolute flex flex-row gap-2 items-center bg-white shadow-md px-3 py-2 rounded-full -bottom-4 cursor-pointer">
                   {!isImageLoading ? (
                     <PulseLoader
                       color="#ff3f62ff"
@@ -236,8 +246,7 @@ database when the `image` state variable changes. */
           className="px-7 py-3 bg-[#282828] hover:bg-[#000000] text-white rounded-lg mx-6 font-medium"
           onClick={() => {
             window.reload();
-          }}
-        >
+          }}>
           Done
         </Link>
       </div>

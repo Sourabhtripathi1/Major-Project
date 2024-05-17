@@ -6,12 +6,14 @@ import { API } from "../backend";
 import axios from "axios";
 import HomePageSkeleton from "../components/skeletonLoading/HomePageSkeleton";
 import ListingPreviewCard from "../components/Home/ListingPreviewCard";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { useGetSubCatListing } from "../hooks/useGetSubCatListing";
 import SkeletonLoadingCards from "../components/skeletonLoading/SkeletonLoadingCards";
 import { FadeLoader } from "react-spinners";
 
 const Home = () => {
+  const { filter } = useParams();
+
   const [hasScroll, setHasScroll] = useState(false);
   //  before tax price state
   const [showBeforeTaxPrice, setShowBeforeTaxPrice] = useState(false);
@@ -22,6 +24,26 @@ const Home = () => {
   const location = useLocation();
 
   // fetching all listing data
+
+  // const allListingData =
+  //   filter == null || filter == ""
+  //     ? useQuery({
+  //         queryKey: ["allListing"],
+  //         queryFn: async () => {
+  //           const res = await axios.get(`${API}house/get_all_listing`);
+  //           return res.data.allListingData;
+  //         },
+  //       })
+  //     : useQuery({
+  //         queryKey: ["allListing"],
+  //         queryFn: async () => {
+  //           const res = await axios.get(
+  //             `${API}house/get_all_listing/filter/${filter}`
+  //           );
+  //           return res.data.allListingData;
+  //         },
+  //       });
+
   const allListingData = useQuery({
     queryKey: ["allListing"],
     queryFn: async () => {
@@ -29,6 +51,22 @@ const Home = () => {
       return res.data.allListingData;
     },
   });
+
+  // if (location.pathname.includes("filter")) {
+  //   if (allListingData?.data?.length > 0) {
+  //     const filterRegex = new RegExp(filter, "i"); // 'i' flag for case-insensitive matching
+
+  //     const datatg = allListingData?.data?.filter(
+  //       (dat) =>
+  //         filterRegex.test(dat.location.country.name) ||
+  //         filterRegex.test(dat.location.state.name) ||
+  //         filterRegex.test(dat.location.city.name)
+  //     );
+  //     console.log("====================================");
+  //     console.log(datatg);
+  //     console.log("====================================");
+  //   }
+  // }
 
   const handleScrollTracking = () => {
     const scrollPosition = window.scrollY;
@@ -109,24 +147,51 @@ const Home = () => {
           {/* all listing data fetching */}
           <section className=" py-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 mx-auto gap-x-7 gap-y-10">
             {location?.search?.split("=")[1]?.includes("House") ||
-            (location?.pathname === "/" &&
+            ((location?.pathname === "/" ||
+              location.pathname.includes("filter")) &&
               !location?.search?.split("?")[1]?.includes("category")) ? (
               <>
                 {allListingData.data &&
                   allListingData.data.length !== 0 &&
                   allListingData.data.map((listing) => {
-                    return (
-                      // this will be link to see full details of the listing
-                      <Link
-                        to={`/rooms/${listing?._id}`}
-                        key={listing._id}
-                        className=" flex flex-col gap-3 rounded-xl w-full sm:max-w-[300px] md:w-full mx-auto">
-                        <ListingPreviewCard
-                          listingData={listing}
-                          showBeforeTaxPrice={showBeforeTaxPrice}
-                        />
-                      </Link>
-                    );
+                    if (
+                      (location.pathname.includes("filter") &&
+                        filter !== null) ||
+                      filter !== " "
+                    ) {
+                      const filterRegex = new RegExp(filter, "i");
+                      if (
+                        filterRegex.test(listing.location.country.name) ||
+                        filterRegex.test(listing.location.state.name) ||
+                        filterRegex.test(listing.location.city.name)
+                      ) {
+                        return (
+                          // this will be link to see full details of the listing
+                          <Link
+                            to={`/rooms/${listing?._id}`}
+                            key={listing._id}
+                            className=" flex flex-col gap-3 rounded-xl w-full sm:max-w-[300px] md:w-full mx-auto">
+                            <ListingPreviewCard
+                              listingData={listing}
+                              showBeforeTaxPrice={showBeforeTaxPrice}
+                            />
+                          </Link>
+                        );
+                      }
+                    } else {
+                      return (
+                        // this will be link to see full details of the listing
+                        <Link
+                          to={`/rooms/${listing?._id}`}
+                          key={listing._id}
+                          className=" flex flex-col gap-3 rounded-xl w-full sm:max-w-[300px] md:w-full mx-auto">
+                          <ListingPreviewCard
+                            listingData={listing}
+                            showBeforeTaxPrice={showBeforeTaxPrice}
+                          />
+                        </Link>
+                      );
+                    }
                   })}
               </>
             ) : (

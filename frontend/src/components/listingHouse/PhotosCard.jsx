@@ -49,14 +49,14 @@ const PhotosCard = () => {
         // console.log(isImgUploading, "loading state");
         const imageFormData = new FormData();
         imageFormData.append("file", inputImage);
-        imageFormData.append("upload_preset", "house-hunter");
-        imageFormData.append("cloud_name", "dlhexsnxq");
+        imageFormData.append("upload_preset", "esr3lzia");
+        imageFormData.append("cloud_name", "do62a7jrx");
 
         // saving to cloudinary
         setIsImgUploading(true);
         try {
           await fetch(
-            "https://api.cloudinary.com/v1_1/dlhexsnxq/image/upload",
+            "https://api.cloudinary.com/v1_1/do62a7jrx/image/upload",
             {
               method: "POST",
               body: imageFormData,
@@ -99,8 +99,7 @@ const PhotosCard = () => {
   return (
     <label
       htmlFor="houseImage"
-      className=" py-20 bg-white border-dashed border-[#b0b0b0] border flex justify-center items-center min-h-[340px]"
-    >
+      className=" py-20 bg-white border-dashed border-[#b0b0b0] border flex justify-center items-center min-h-[340px]">
       {isImgUploading ? (
         <>
           <PropagateLoader loading color="#717171" />

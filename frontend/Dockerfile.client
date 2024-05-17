@@ -1,5 +1,9 @@
 FROM node:21-alpine
 
+
+ENV VITE_BACKEND_URI="http://roomease-api.sourabhtripathi.online"
+
+
 EXPOSE 3001
 
 WORKDIR /app

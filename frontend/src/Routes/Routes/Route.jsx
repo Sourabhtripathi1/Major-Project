@@ -78,11 +78,33 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       {
-        path: "/trips",
-        element: <UserReservations />,
+        path: "/",
+        element: (
+          <Suspense
+            fallback={
+              <div className=" flex justify-center items-center w-full h-[60dvh]">
+                <FadeLoader color="#000" />
+              </div>
+            }>
+            <Home />
+          </Suspense>
+        ),
       },
       {
-        path: "/",
+        path: "/filter",
+        element: (
+          <Suspense
+            fallback={
+              <div className=" flex justify-center items-center w-full h-[60dvh]">
+                <FadeLoader color="#000" />
+              </div>
+            }>
+            <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/filter/:filter",
         element: (
           <Suspense
             fallback={
@@ -120,6 +142,10 @@ const router = createBrowserRouter([
             <Book />,
           </Suspense>
         ),
+      },
+      {
+        path: "/trips",
+        element: <UserReservations />,
       },
       {
         path: "/users/show/:id",

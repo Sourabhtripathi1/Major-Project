@@ -1,10 +1,13 @@
 import axios from "axios";
+import { getEnv } from "./env";
 
-export const API = "http://localhost:5001/";
+const apiUri = getEnv("VITE_BACKEND_URI");
+
+export const API = `${apiUri}`;
 // export const API = "https://backend-api-jc-production.up.railway.app/";
 
 const api = axios.create({
-  baseURL: "http://localhost:5001/",
+  baseURL: `${apiUri}`,
   // baseURL: "https://backend-api-jc-production.up.railway.app/",
 });
 

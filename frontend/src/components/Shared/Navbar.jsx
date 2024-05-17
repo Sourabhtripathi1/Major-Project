@@ -42,11 +42,36 @@ const Navbar = () => {
         setShowUserMenu(false);
       }
     };
-    document.addEventListener("mouseup", handleOutsideClick);
+    document?.addEventListener("mouseup", handleOutsideClick);
     return () => {
-      document.removeEventListener("mouseup", handleOutsideClick);
+      document?.removeEventListener("mouseup", handleOutsideClick);
     };
   }, []);
+
+  const [searchString, setsearchString] = useState("");
+  const buttonRef = useRef(null);
+  useEffect(() => {
+    const button = buttonRef.current;
+    const handleClick = () => {
+      FilterData();
+    };
+    button?.addEventListener("click", handleClick);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      button?.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  const FilterData = () => {
+    navigate(`/filter/${searchString}`);
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === "Enter") {
+      FilterData();
+    }
+  };
 
   return (
     <nav
@@ -99,10 +124,9 @@ const Navbar = () => {
               // if user is in dahsboard
               <div>{inUserDashboard && <MiniNavbar />} </div>
             ) : (
-              <>
-                <div className="mx-auto lg:block hidden">
-                  <div>
-                    {/* <input
+              <div className="mx-auto lg:block hidden">
+                <div className="border-[1px] border-[#dddddd] rounded-full px-3 py-2 flex items-center shadow hover:shadow-md transition-all cursor-pointer">
+                  <input
                     type="search"
                     className=" focus:outline-none pl-2"
                     style={{
@@ -110,14 +134,19 @@ const Navbar = () => {
                       height: "30px",
                       marginRight: "8px",
                     }}
+                    value={searchString}
                     placeholder="Search for places"
+                    onChange={(e) => setsearchString(e.target.value)}
+                    onKeyDown={handleSearchKeyDown}
                   />
-                  <div className="bg-[#ff385c] rounded-full p-2">
+                  <div
+                    className="bg-[#ff385c] rounded-full p-2"
+                    id="SearchButtton"
+                    ref={buttonRef}>
                     <img src={searchIcon} alt="Search hotel" className="w-4" />
-                  </div> */}
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </>
         )}

@@ -16,13 +16,13 @@ export const ContactUs = () => {
     // Send email to the admin
     emailjs
       .send(
-        "service_pifdyyh",
-        "template_8e0ov6p",
+        "service_0wjrco8",
+        "template_xdj5rqt",
         {
           user_email: "sourabhtripathi8103@gmail.com", // Admin email
           message: `Query from ${clientName}: ${form.current["message"].value}`,
         },
-        { publicKey: "W7JLonZhnMYOR4Vb7" }
+        { publicKey: "uD-RCtX5q2u9CM-Mk" }
       )
       .then(() => {
         console.log("Email sent to admin!");
