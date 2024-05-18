@@ -10,8 +10,7 @@ const PreviewCard = () => {
     <>
       <div
         className=" flex flex-col gap-3 rounded-2xl shadow-lg bg-white border-[#f1f1f1] border max-w-sm p-4 cursor-pointer mx-auto"
-        onClick={() => window.my_modal_4.showModal()}
-      >
+        onClick={() => window.my_modal_4.showModal()}>
         <div className=" relative ">
           {currentHouseData?.photos[0] ? (
             <img
@@ -34,7 +33,7 @@ const PreviewCard = () => {
               {currentHouseData?.title}
             </p>
             <span className=" flex flex-row gap-1">
-              <p className=" font-bold">${currentHouseData?.basePrice}</p>
+              <p className=" font-bold">₹{currentHouseData?.basePrice}</p>
               <span>night</span>
             </span>
           </div>
@@ -84,8 +83,8 @@ const PreviewCard = () => {
                 {currentHouseData?.location?.addressLineOne
                   ? currentHouseData?.location?.addressLineOne
                   : currentHouseData?.location?.addressLineTwo
-                  ? currentHouseData?.location?.addressLineTwo
-                  : currentHouseData?.location?.country?.name}
+                    ? currentHouseData?.location?.addressLineTwo
+                    : currentHouseData?.location?.country?.name}
               </p>
               <p className="text-white text-xs text-[#222222] opacity-60">
                 We’ll only share your address with guests who are booked as

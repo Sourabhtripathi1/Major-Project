@@ -39,7 +39,7 @@ const HouseHostingDetails = ({ setLatAndLong }) => {
         </div>
         {/* amount in $ */}
         <p className=" text-center text-[#222222] font-semibold text-3xl my-2 md:text-7xl md:my-4">
-          ${perNightEarnig}
+          ₹{perNightEarnig}
         </p>
         {/* description of earning */}
 
@@ -64,8 +64,7 @@ const HouseHostingDetails = ({ setLatAndLong }) => {
           }}
           onMouseLeave={() => {
             setActiveTooltip((prev) => !prev);
-          }}
-        >
+          }}>
           <input
             type="range"
             min={1}
@@ -85,8 +84,7 @@ const HouseHostingDetails = ({ setLatAndLong }) => {
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
             setShowCheckPricePopup((prev) => !prev);
-          }}
-        >
+          }}>
           <img src={search} alt="search" className="w-4 md:w-6" />
           <div className=" flex flex-col text-sm md:text-xs">
             <p>{country ? country.name : "Where's your place?"}</p>

@@ -83,6 +83,34 @@ const ReservationCard = ({ listingData }) => {
   const orderId = orderNumber ? orderNumber : 1;
   // console.log(orderId);
   const handleBooking = () => {
+    // console.log(parseISO(formattedStartDate).toISOString());
+    // console.log();
+    // const formatDate = (date) => {
+    //   const d = new Date(date);
+    //   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    // };
+
+    // console.log(
+    //   disabledDates
+    //     .map(formatDate)
+    //     .includes(formatDate(parseISO(formattedStartDate)))
+    // );
+    // console.log(disabledDates[0]);
+    // console.log(
+    //   disabledDates[0].toISOString == parseISO(formattedStartDate).toISOString
+    // );
+    // console.log(disabledDates.map((date) => date.toISOString())[0]);
+    // console.log(
+    //   disabledDates
+    //     .map((date) => date.toISOString())
+    //     .includes(parseISO(formattedStartDate).toISOString())
+    // );
+    // if (disabledDates.includes(parseISO(formattedStartDate))) {
+    //   console.log("====================================");
+    //   console.log("Already, booked for current date");
+    //   console.log("====================================");
+    // }
+
     navigate(
       `/book/stays/${listingData._id}?numberOfGuests=${totalGuest}&nightStaying=${nightsStaying}&checkin=${formattedStartDate}&checkout=${formattedEndDate}&orderId=${orderId}`
     );
@@ -163,7 +191,7 @@ const ReservationCard = ({ listingData }) => {
     endDate: parseISO(obj.checkOut),
   }));
 
-  // console.log(disabledDateRanges);
+  // console.log(disabledDateRanges, "disabledDateRanges");
 
   // Generate an array of individual dates within disabledDateRanges
   const disabledDates = disabledDateRanges.reduce((dates, range) => {
@@ -178,6 +206,10 @@ const ReservationCard = ({ listingData }) => {
 
     return dates;
   }, []);
+
+  // console.log("====================================");
+  // console.log(parseISO(formattedStartDate));
+  // console.log("====================================");
 
   return (
     <>

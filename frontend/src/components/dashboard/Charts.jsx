@@ -10,7 +10,7 @@ import {
   Tooltip,
 } from "recharts";
 
-const yAxisData = (value) => `$${value}`;
+const yAxisData = (value) => `₹${value}`;
 
 const Charts = ({ reservations }) => {
   const [monthlyEarnings, setMonthlyEarnings] = useState(Array(12)?.fill(0));

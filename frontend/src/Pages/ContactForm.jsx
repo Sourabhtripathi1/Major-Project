@@ -40,7 +40,7 @@ export const ContactUs = () => {
         <div className="row">
           <div className="contact-left">
             <h1 className="sub-title">Contact Us</h1>
-            <p>sourabhtripathi38@gmail.com</p>
+            {/* <p>sourabhtripathi38@gmail.com</p> */}
           </div>
           <div className="contact-right">
             <form ref={form} onSubmit={sendEmail}>

@@ -144,8 +144,7 @@ const WelcomePopup = ({
               isLoading ? " cursor-not-allowed" : ""
             }`}
             type="submit"
-            disabled={isLoading}
-          >
+            disabled={isLoading}>
             {isLoading ? (
               <PulseLoader
                 color="#f7f7f7"
@@ -160,13 +159,13 @@ const WelcomePopup = ({
         </form>
       </div>
       {/* devider */}
-      <div className="flex flex-row items-center px-8">
+      {/* <div className="flex flex-row items-center px-8">
         <div className="h-[1.2px] w-full inline-block bg-[#dddddd]"></div>
         <p className="inline-block text-xs mx-2">or</p>
         <div className="h-[1.2px] w-full inline-block bg-[#dddddd]"></div>
-      </div>
+      </div> */}
       {/* continue with google/facebook */}
-      <div className=" flex flex-col gap-4 px-8 pb-7">
+      {/* <div className=" flex flex-col gap-4 px-8 pb-7">
         <div
           className=" w-full flex flex-row items-center border border-[#222222] rounded-lg py-[10px] bg-[#ffffff] hover:bg-[#f7f7f7] transition-colors cursor-pointer"
           onClick={handleFacebookLogin}
@@ -176,7 +175,7 @@ const WelcomePopup = ({
             Continue with Facebook
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

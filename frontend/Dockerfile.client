@@ -1,7 +1,7 @@
 FROM node:21-alpine
 
 
-ENV VITE_BACKEND_URI="http://roomease-api.sourabhtripathi.online"
+ENV VITE_BACKEND_URI="https://roomease-api.sourabhtripathi.online/"
 
 
 EXPOSE 3001
